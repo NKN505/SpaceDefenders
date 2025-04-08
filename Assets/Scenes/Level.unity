@@ -38520,7 +38520,6 @@ GameObject:
   - component: {fileID: 5826056641646607651}
   - component: {fileID: 5033801203484386419}
   - component: {fileID: 1940299949}
-  - component: {fileID: 6520291404496095134}
   m_Layer: 2
   m_Name: XR Origin (XR Rig)
   m_TagString: MainCamera
@@ -45342,14 +45341,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
---- !u!81 &6520291404496095134
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954562066946111}
-  m_Enabled: 1
 --- !u!1 &6553456492727176871
 GameObject:
   m_ObjectHideFlags: 0
