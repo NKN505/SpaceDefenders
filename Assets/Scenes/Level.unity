@@ -37212,7 +37212,7 @@ MonoBehaviour:
   firePoint: {fileID: 955705986}
   laserPrefab: {fileID: 122648, guid: 11530f2b0a0cd2442949827ecbb622f2, type: 3}
   range: 500
-  triggerAction: {fileID: 0}
+  triggerAction: {fileID: -2439264783773714294, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
 --- !u!1 &709297095204243451
 GameObject:
   m_ObjectHideFlags: 0
@@ -41970,7 +41970,7 @@ MonoBehaviour:
   firePoint: {fileID: 822612636}
   laserPrefab: {fileID: 122648, guid: 11530f2b0a0cd2442949827ecbb622f2, type: 3}
   range: 500
-  triggerAction: {fileID: 0}
+  triggerAction: {fileID: 3901720967980471126, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
 --- !u!1 &3832703583498178883
 GameObject:
   m_ObjectHideFlags: 0
