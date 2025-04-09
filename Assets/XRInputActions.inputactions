@@ -1,0 +1,45 @@
+{
+    "name": "XRInputActions",
+    "maps": [
+        {
+            "name": "XRControls",
+            "id": "bf6bfa0b-4925-473c-8d33-ac84f34f7caf",
+            "actions": [
+                {
+                    "name": "TriggerPress",
+                    "type": "Value",
+                    "id": "71c0dc5c-a9b7-4997-87d7-e69a43c22b65",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "624523d5-a95a-4cb8-bfe3-b4b2a0a12877",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f01e7c4-4900-43b5-9d45-719e278967d2",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
