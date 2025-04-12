@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 2f;
+    public float speed = 10f;
     private Transform player;
 
     private void Start()
@@ -25,8 +25,20 @@ public class EnemyMovement : MonoBehaviour
     {
         if (other.CompareTag("Player"))  // Asegúrate de que la cámara tiene la etiqueta "Player"
         {
-            // Aquí destruyes el enemigo después de la colisión
-            Destroy(gameObject);  // Destruye al enemigo que colisionó con la cámara
+            // Obtener el componente PlayerHealth del jugador
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                // Generar un daño aleatorio entre 1 y 5 puntos
+                int damageAmount = Random.Range(1, 6);  // Obtiene un valor entre 1 y 5
+
+                // Aplicar el daño al jugador
+                playerHealth.TakeDamage(damageAmount);
+            }
+
+            // Destruir el enemigo después de hacerle daño al jugador
+            Destroy(gameObject);
         }
     }
 }
