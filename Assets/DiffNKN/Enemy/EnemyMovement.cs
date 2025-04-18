@@ -33,8 +33,11 @@ public class EnemyMovement : MonoBehaviour
                 // Generar un daño aleatorio entre 1 y 5 puntos
                 int damageAmount = Random.Range(1, 6);  // Obtiene un valor entre 1 y 5
 
+                // Calcular la dirección del golpe desde el enemigo hacia el jugador
+                Vector3 hitDirection = (player.position - transform.position).normalized;
+
                 // Aplicar el daño al jugador
-                playerHealth.TakeDamage(damageAmount);
+                playerHealth.TakeDamage(damageAmount, hitDirection);
             }
 
             // Destruir el enemigo después de hacerle daño al jugador
