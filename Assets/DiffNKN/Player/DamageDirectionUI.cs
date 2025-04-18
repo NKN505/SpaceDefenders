@@ -4,64 +4,79 @@ using System.Collections;
 
 public class DamageDirectionUI : MonoBehaviour
 {
-    public Image upIndicator;
-    public Image downIndicator;
+    public Image upIndicator;    // Frente
+    public Image downIndicator;  // Atrás
     public Image leftIndicator;
     public Image rightIndicator;
-    public float showTime = 0.5f; // Duración del indicador
+    public float showTime = 0.5f;
+    public float fadeDuration = 0.3f;
+    public float maxAlpha = 0.6f; // Nueva opacidad máxima
+
+    private void Start()
+    {
+        DisableIndicators(); // Desactiva los indicadores al inicio
+    }
 
     public void ShowDirection(Vector3 hitDirection, Transform playerTransform)
     {
-        // Convertimos la dirección del golpe al espacio local del jugador
+        Debug.Log("ShowDirection llamada con hitDirection: " + hitDirection);
+
         Vector3 localDir = playerTransform.InverseTransformDirection(hitDirection);
 
-        // Determinamos cuál dirección activar
         if (Mathf.Abs(localDir.z) > Mathf.Abs(localDir.x))
         {
-            // Golpe más fuerte en el eje Z
-            if (localDir.z > 0)
-                StartCoroutine(FlashIndicator(downIndicator)); // Golpe desde delante
+            if (localDir.z < 0)
+                StartCoroutine(FadeIndicator(upIndicator));   // Golpe desde delante
             else
-                StartCoroutine(FlashIndicator(upIndicator));   // Golpe desde detrás
-        }
-        else if (Mathf.Abs(localDir.x) > Mathf.Abs(localDir.z))
-        {
-            // Golpe más fuerte en el eje X
-            if (localDir.x > 0)
-                StartCoroutine(FlashIndicator(leftIndicator)); // Golpe desde la derecha
-            else
-                StartCoroutine(FlashIndicator(rightIndicator)); // Golpe desde la izquierda
+                StartCoroutine(FadeIndicator(downIndicator)); // Golpe desde detrás
         }
         else
         {
-            // Golpe diagonal: activamos ambos indicadores, dependiendo de la dirección
-            if (localDir.x > 0 && localDir.z > 0)
-            {
-                StartCoroutine(FlashIndicator(leftIndicator));  // Golpe desde abajo a la derecha
-                StartCoroutine(FlashIndicator(downIndicator)); // Golpe desde abajo a la derecha
-            }
-            else if (localDir.x < 0 && localDir.z > 0)
-            {
-                StartCoroutine(FlashIndicator(rightIndicator)); // Golpe desde abajo a la izquierda
-                StartCoroutine(FlashIndicator(downIndicator));  // Golpe desde abajo a la izquierda
-            }
-            else if (localDir.x > 0 && localDir.z < 0)
-            {
-                StartCoroutine(FlashIndicator(leftIndicator));  // Golpe desde arriba a la derecha
-                StartCoroutine(FlashIndicator(upIndicator));   // Golpe desde arriba a la derecha
-            }
+            if (localDir.x < 0)
+                StartCoroutine(FadeIndicator(leftIndicator)); // Golpe desde izquierda
             else
-            {
-                StartCoroutine(FlashIndicator(rightIndicator)); // Golpe desde arriba a la izquierda
-                StartCoroutine(FlashIndicator(upIndicator));   // Golpe desde arriba a la izquierda
-            }
+                StartCoroutine(FadeIndicator(rightIndicator)); // Golpe desde derecha
         }
     }
 
-    private IEnumerator FlashIndicator(Image indicator)
+    private IEnumerator FadeIndicator(Image indicator)
     {
+        if (indicator == null) yield break;
+
+        Color originalColor = indicator.color;
+        originalColor.a = 0f;
+        indicator.color = originalColor;
         indicator.enabled = true;
+
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, maxAlpha, t / fadeDuration); // Aquí limitamos el alpha
+            indicator.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
         yield return new WaitForSeconds(showTime);
+
+        t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(maxAlpha, 0f, t / fadeDuration); // Igual aquí
+            indicator.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
         indicator.enabled = false;
+    }
+
+    public void DisableIndicators()
+    {
+        // Desactiva los indicadores cuando el jugador muere
+        if (upIndicator != null) upIndicator.enabled = false;
+        if (downIndicator != null) downIndicator.enabled = false;
+        if (leftIndicator != null) leftIndicator.enabled = false;
+        if (rightIndicator != null) rightIndicator.enabled = false;
     }
 }

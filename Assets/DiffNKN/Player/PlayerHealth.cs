@@ -1,52 +1,74 @@
 using UnityEngine;
-using TMPro;  // Importa el espacio de nombres de TextMesh Pro
+using TMPro; // Asegúrate de tener esto para usar TextMeshProUGUI
+using UnityEngine.UI; // Necesario para usar Image
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health = 100f;  // Salud inicial del jugador
-    public TextMeshProUGUI healthText;  // Referencia al texto de TMP que mostrará la salud
-    public DamageDirectionUI damageUI;  // Referencia al script de UI para la dirección del daño
+    public float maxHealth = 100f;
+    private float currentHealth;
+
+    public TextMeshProUGUI healthText;
+    public DamageDirectionUI damageUI;
+
+    public Image deathScreen; // Imagen que se activa al morir
 
     private void Start()
     {
-        // Inicializar el texto con la salud actual del jugador
-        UpdateHealthText();
-    }
+        currentHealth = maxHealth;
+        UpdateHealthUI();
 
-    public void TakeDamage(float damage, Vector3 hitDirection)
-    {
-        health -= damage;
-        if (health <= 0)
+        if (deathScreen != null)
         {
-            health = 0;
-            // Aquí puedes manejar lo que sucede cuando el jugador muere
-            Debug.Log("¡El jugador ha muerto!");
+            deathScreen.gameObject.SetActive(false); // Oculta al iniciar
         }
 
-        // Actualiza el texto de la salud
-        UpdateHealthText();
-
-        // Mostrar dirección del golpe
         if (damageUI != null)
         {
-            damageUI.ShowDirection(hitDirection, transform);  // Llamamos a ShowDirection de DamageDirectionUI
+            damageUI.DisableIndicators(); // Desactiva los indicadores al iniciar
         }
     }
 
-    private void UpdateHealthText()
+    public void TakeDamage(float amount, Vector3 hitDirection)
     {
-        // Convierte salud a entero y actualiza el texto
-        int currentHealth = Mathf.FloorToInt(health);
-        healthText.text = "+ " + currentHealth.ToString();
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // Cambia el color dependiendo de la salud
-        if (currentHealth <= 20)
+        UpdateHealthUI();
+
+        if (damageUI != null)
         {
-            healthText.color = Color.red;
+            damageUI.ShowDirection(hitDirection, transform);
         }
-        else
+
+        if (currentHealth <= 0)
         {
-            healthText.color = Color.green;
+            Debug.Log("¡Jugador muerto!");
+            if (deathScreen != null)
+            {
+                deathScreen.gameObject.SetActive(true); // Muestra pantalla de muerte
+            }
+
+            if (damageUI != null)
+            {
+                damageUI.DisableIndicators(); // Desactiva los indicadores al morir
+            }
+        }
+    }
+
+    private void UpdateHealthUI()
+    {
+        if (healthText != null)
+        {
+            healthText.text = "+ " + Mathf.CeilToInt(currentHealth).ToString();
+
+            if (currentHealth <= 20)
+            {
+                healthText.color = Color.red;
+            }
+            else
+            {
+                healthText.color = Color.green;
+            }
         }
     }
 }
