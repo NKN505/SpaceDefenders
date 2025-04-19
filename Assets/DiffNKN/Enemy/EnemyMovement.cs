@@ -4,11 +4,12 @@ public class EnemyMovement : MonoBehaviour
 {
     public float speed = 10f;
     private Transform player;
-    private bool hasDamaged = false; // Bandera para controlar daño único
+    private bool hasDamaged = false;
 
     private void Start()
     {
-        player = Camera.main.transform; // Asignar la cámara del jugador (XR Origin)
+        if (Camera.main != null)
+            player = Camera.main.transform; // Asegura que haya cámara principal
     }
 
     private void Update()
@@ -21,21 +22,32 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Verificar: 1) Que sea el jugador, 2) Que no haya aplicado daño ya
-        if (other.CompareTag("Player") && !hasDamaged)
+        if (!hasDamaged && other.CompareTag("Player"))
         {
-            hasDamaged = true; // Bloquear más daños
+            hasDamaged = true;
+
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            
+            PlayerArmor playerArmor = other.GetComponent<PlayerArmor>();
+
             if (playerHealth != null)
             {
-                int damageAmount = Random.Range(1, 6); // Daño entre 1-5
-                Vector3 hitDirection = (player.position - transform.position).normalized;
-                playerHealth.TakeDamage(damageAmount, hitDirection);
-                Debug.Log($"Daño aplicado: {damageAmount}"); // Para debug
+                int damageAmount = Random.Range(1, 6); // Daño aleatorio 1-5
+
+                Vector3 hitDirection = (playerHealth.transform.position - transform.position).normalized;
+
+                if (playerArmor != null)
+                {
+                    playerArmor.AbsorbDamage(damageAmount, playerHealth, hitDirection);
+                }
+                else
+                {
+                    playerHealth.TakeDamage(damageAmount, hitDirection);
+                }
+
+                Debug.Log($"Daño aplicado: {damageAmount}");
             }
 
-            Destroy(gameObject); // Destruir enemigo tras el daño
+            Destroy(gameObject); // Eliminar enemigo después del impacto
         }
     }
 }

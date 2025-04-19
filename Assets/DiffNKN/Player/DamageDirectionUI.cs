@@ -4,38 +4,48 @@ using System.Collections;
 
 public class DamageDirectionUI : MonoBehaviour
 {
-    public Image upIndicator;    // Frente
-    public Image downIndicator;  // Atrás
+    public Image upIndicator;
+    public Image downIndicator;
     public Image leftIndicator;
     public Image rightIndicator;
+
     public float showTime = 0.5f;
     public float fadeDuration = 0.3f;
-    public float maxAlpha = 0.6f; // Nueva opacidad máxima
+    public float maxAlpha = 0.6f;
 
     private void Start()
     {
-        DisableIndicators(); // Desactiva los indicadores al inicio
+        DisableIndicators();
     }
 
-    public void ShowDirection(Vector3 hitDirection, Transform playerTransform)
+    /// <summary>
+    /// Muestra la flecha correspondiente. color: rojo si daño a salud, amarillo si solo armadura.
+    /// </summary>
+    public void ShowDirection(Vector3 hitDirection, Transform playerTransform, bool healthHit = true)
     {
-        Debug.Log("ShowDirection llamada con hitDirection: " + hitDirection);
+        DisableIndicators();
+        
+        // Calcula la dirección en el plano horizontal
+        Vector3 dir = new Vector3(hitDirection.x, 0f, hitDirection.z).normalized;
+        float angle = Vector3.SignedAngle(playerTransform.forward, dir, Vector3.up);
 
-        Vector3 localDir = playerTransform.InverseTransformDirection(hitDirection);
-
-        if (Mathf.Abs(localDir.z) > Mathf.Abs(localDir.x))
-        {
-            if (localDir.z < 0)
-                StartCoroutine(FadeIndicator(upIndicator));   // Golpe desde delante
-            else
-                StartCoroutine(FadeIndicator(downIndicator)); // Golpe desde detrás
-        }
+        Image indicator = null;
+        if (angle > -45f && angle <= 45f)
+            indicator = upIndicator;
+        else if (angle > 45f && angle <= 135f)
+            indicator = rightIndicator;
+        else if (angle > 135f || angle <= -135f)
+            indicator = downIndicator;
         else
+            indicator = leftIndicator;
+
+        if (indicator != null)
         {
-            if (localDir.x < 0)
-                StartCoroutine(FadeIndicator(leftIndicator)); // Golpe desde izquierda
-            else
-                StartCoroutine(FadeIndicator(rightIndicator)); // Golpe desde derecha
+            // Ajusta color según tipo de daño
+            indicator.color = healthHit ? 
+                new Color(1f, 0f, 0f, indicator.color.a) :  // Rojo
+                new Color(1f, 1f, 0f, indicator.color.a);   // Amarillo
+            StartCoroutine(FadeIndicator(indicator));
         }
     }
 
@@ -43,28 +53,27 @@ public class DamageDirectionUI : MonoBehaviour
     {
         if (indicator == null) yield break;
 
-        Color originalColor = indicator.color;
-        originalColor.a = 0f;
-        indicator.color = originalColor;
+        Color original = indicator.color;
+        indicator.color = new Color(original.r, original.g, original.b, 0f);
         indicator.enabled = true;
 
         float t = 0f;
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, maxAlpha, t / fadeDuration); // Aquí limitamos el alpha
-            indicator.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            float a = Mathf.Lerp(0f, maxAlpha, t / fadeDuration);
+            indicator.color = new Color(original.r, original.g, original.b, a);
             yield return null;
         }
 
         yield return new WaitForSeconds(showTime);
-
         t = 0f;
+
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Lerp(maxAlpha, 0f, t / fadeDuration); // Igual aquí
-            indicator.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            float a = Mathf.Lerp(maxAlpha, 0f, t / fadeDuration);
+            indicator.color = new Color(original.r, original.g, original.b, a);
             yield return null;
         }
 
@@ -73,7 +82,6 @@ public class DamageDirectionUI : MonoBehaviour
 
     public void DisableIndicators()
     {
-        // Desactiva los indicadores cuando el jugador muere
         if (upIndicator != null) upIndicator.enabled = false;
         if (downIndicator != null) downIndicator.enabled = false;
         if (leftIndicator != null) leftIndicator.enabled = false;
