@@ -771,7 +771,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd0a3c27952541741a80bde95b3f1eb5, type: 2}
+  - {fileID: 2100000, guid: 38c7ce4216c660c40a4b5fe74401ecec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4260,11 +4260,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4057339698595673901}
   - component: {fileID: 4626505315139291401}
-  - component: {fileID: -5786739105837353356}
   - component: {fileID: 7031092484091554225}
   - component: {fileID: 5679231848319630698}
+  - component: {fileID: 3671171453825686377}
   m_Layer: 0
-  m_Name: HermenegildoProbando
+  m_Name: HermenegildoProbando 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4310,20 +4310,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-5786739105837353356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5833126743440001775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97e7fadd51bdf6b49b0bb437810ece2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  impactHeightOffset: -10
 --- !u!65 &7031092484091554225
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4372,6 +4358,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3671171453825686377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833126743440001775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca905e242d9d047428e9a994c9fdbe27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  impactHeightOffset: 0.2
 --- !u!1 &5863037430149573049
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ public class PlayerArmor : MonoBehaviour
     public float maxArmor = 100f;
 
     [Header("UI References")]
-    public TextMeshProUGUI armorText;    // Texto numérico de la armadura
-    public TextMeshProUGUI armorSymbol;  // Símbolo de armadura
-    public Canvas armorCanvas;           // Canvas completo de la UI de armadura
+    public TextMeshProUGUI armorText;
+    public TextMeshProUGUI armorSymbol;
+    public Canvas armorCanvas;
 
     private void Start()
     {
@@ -19,40 +19,49 @@ public class PlayerArmor : MonoBehaviour
         UpdateArmorUI();
     }
 
-    /// <summary>
-    /// Absorbe parte del daño y pasa el resto a PlayerHealth.
-    /// Si solo la armadura reduce el daño (salud intacta), activa indicador amarillo.
-    /// </summary>
     public void AbsorbDamage(float damageAmount, PlayerHealth playerHealth, Vector3 hitDirection)
     {
         if (playerHealth == null) return;
 
+        int damage = Mathf.CeilToInt(damageAmount); // Sin decimales
+
+        // 20% de probabilidad de absorber todo el daño
+        if (Random.value <= 0.2f && armor >= damage)
+        {
+            armor -= damage;
+            UpdateArmorUI();
+            Debug.Log($"Armadura absorbió el 100% del daño: {damage} puntos.");
+
+            // Mostrar feedback amarillo
+            if (playerHealth.damageUI != null)
+                playerHealth.damageUI.ShowDirection(hitDirection, playerHealth.transform, false);
+
+            return;
+        }
+
         if (armor > 0)
         {
-            int half = Mathf.CeilToInt(damageAmount * 0.5f);
-            float damageToAbsorb = Mathf.Min(half, armor);
+            int half = Mathf.CeilToInt(damage * 0.5f);
+            int damageToAbsorb = Mathf.Min(half, Mathf.FloorToInt(armor)); // Sin decimales
 
             armor -= damageToAbsorb;
             UpdateArmorUI();
             Debug.Log($"Armadura absorbió {damageToAbsorb} de daño.");
 
-            float remainingDamage = damageAmount - damageToAbsorb;
+            int remainingDamage = damage - damageToAbsorb;
             if (remainingDamage > 0)
             {
-                // Daño restante a salud (rojo)
                 playerHealth.TakeDamage(remainingDamage, hitDirection);
             }
             else
             {
-                // Solo armadura (amarillo)
                 if (playerHealth.damageUI != null)
                     playerHealth.damageUI.ShowDirection(hitDirection, playerHealth.transform, false);
             }
         }
         else
         {
-            // Sin armadura, daño directo (rojo)
-            playerHealth.TakeDamage(damageAmount, hitDirection);
+            playerHealth.TakeDamage(damage, hitDirection);
         }
     }
 
@@ -86,9 +95,6 @@ public class PlayerArmor : MonoBehaviour
             armorCanvas.gameObject.SetActive(true);
     }
 
-    /// <summary>
-    /// Oculta la UI completa de armadura cuando el jugador muere.
-    /// </summary>
     public void HideArmorUI()
     {
         if (armorCanvas != null)

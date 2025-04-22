@@ -1,25 +1,23 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement3 : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 4f;  // Velocidad más lenta
     private Transform player;
     private bool hasDamaged = false;
 
-    // Define la altura a la que quieres que los enemigos impacten (por ejemplo, al nivel del pecho)
-    public float impactHeightOffset = 0.2f;  // Ajusta esto según la altura del jugador
+    public float impactHeightOffset = 0.2f; // Impacta más cerca del centro del cuerpo
 
     private void Start()
     {
         if (Camera.main != null)
-            player = Camera.main.transform; // Asegura que haya cámara principal
+            player = Camera.main.transform;
     }
 
     private void Update()
     {
         if (player != null)
         {
-            // Movimiento hacia el jugador
             transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
     }
@@ -35,13 +33,11 @@ public class EnemyMovement : MonoBehaviour
 
             if (playerHealth != null)
             {
-                int damageAmount = Random.Range(1, 6); // Daño aleatorio 1-5
+                int damageAmount = Random.Range(10, 16); // Daño aleatorio entre 10 y 15
 
-                // Ajusta la posición de impacto a una altura más baja en el jugador
                 Vector3 targetPosition = playerHealth.transform.position;
-                targetPosition.y -= impactHeightOffset;  // Baja la altura para impactar el cuerpo, no la cabeza
+                targetPosition.y -= impactHeightOffset;
 
-                // Dirección hacia la nueva posición de impacto
                 Vector3 hitDirection = (targetPosition - transform.position).normalized;
 
                 if (playerArmor != null)
@@ -53,10 +49,10 @@ public class EnemyMovement : MonoBehaviour
                     playerHealth.TakeDamage(damageAmount, hitDirection);
                 }
 
-                Debug.Log($"Daño aplicado: {damageAmount}");
+                Debug.Log($"EnemyMovement3 - Daño aplicado: {damageAmount}");
             }
 
-            Destroy(gameObject); // Eliminar enemigo después del impacto
+            Destroy(gameObject);
         }
     }
 }

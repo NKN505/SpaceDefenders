@@ -1,27 +1,112 @@
 using System.Collections;
 using UnityEngine;
 
+[System.Serializable]
+public class SpawnArea
+{
+    public Vector3 position = Vector3.zero;
+    public Vector3 size = new Vector3(2f, 2f, 0.5f);
+}
+
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;  // Prefab del enemigo que quieres que se genere
-    public Transform spawnPoint;    // Único punto de spawn
-    public float spawnInterval = 3f; // Intervalo de tiempo para generar enemigos
+    [Header("Enemy Prefabs (con probabilidades)")]
+    public GameObject enemyPrefab1; // 50%
+    public GameObject enemyPrefab2; // 30%
+    public GameObject enemyPrefab3; // 20%
+
+    [Header("Spawn Areas")]
+    public SpawnArea[] spawnAreas;
+
+    [Header("Spawn Timing")]
+    public float minSpawnInterval = 1f;
+    public float maxSpawnInterval = 5f;
+
+    [Header("Spawn Restrictions")]
+    public float minSpawnDistance = 2f;
+    public float spawnCheckRadius = 1f;
+    public LayerMask obstacleMask;
+
+    private Vector3 lastSpawnPosition = Vector3.positiveInfinity;
 
     private void Start()
     {
-        // Comienza a generar enemigos a intervalos regulares
         StartCoroutine(SpawnEnemies());
     }
 
     private IEnumerator SpawnEnemies()
     {
-        while (true) // Genera enemigos de manera continua
+        while (true)
         {
-            // Instancia un enemigo en el único punto de spawn
-            Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+            Vector3 spawnPos = GetValidRandomPosition();
 
-            // Espera un intervalo antes de generar el siguiente enemigo
-            yield return new WaitForSeconds(spawnInterval);
+            GameObject enemyToSpawn = GetRandomEnemyPrefab();
+            if (enemyToSpawn != null)
+                Instantiate(enemyToSpawn, spawnPos, Quaternion.identity);
+
+            float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    private GameObject GetRandomEnemyPrefab()
+    {
+        float roll = Random.Range(0f, 1f);
+
+        if (roll < 0.5f)       // 50%
+            return enemyPrefab1;
+        else if (roll < 0.8f)  // 30%
+            return enemyPrefab2;
+        else                   // 20%
+            return enemyPrefab3;
+    }
+
+    private Vector3 GetValidRandomPosition()
+    {
+        SpawnArea selectedArea = spawnAreas[Random.Range(0, spawnAreas.Length)];
+        Vector3 center = transform.TransformPoint(selectedArea.position);
+        Vector3 randomPos = Vector3.zero;
+        int attempts = 0;
+
+        do
+        {
+            float x = Random.Range(-selectedArea.size.x / 2, selectedArea.size.x / 2);
+            float y = Random.Range(-selectedArea.size.y / 2, selectedArea.size.y / 2);
+            float z = Random.Range(-selectedArea.size.z / 2, selectedArea.size.z / 2);
+
+            randomPos = center + new Vector3(x, y, z);
+            attempts++;
+
+            if (attempts > 20) break;
+
+        } while (
+            Vector3.Distance(randomPos, lastSpawnPosition) < minSpawnDistance ||
+            Physics.CheckSphere(randomPos, spawnCheckRadius, obstacleMask)
+        );
+
+        lastSpawnPosition = randomPos;
+        return randomPos;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (spawnAreas == null) return;
+
+        for (int i = 0; i < spawnAreas.Length; i++)
+        {
+            var area = spawnAreas[i];
+            Vector3 worldPos = transform.TransformPoint(area.position);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(worldPos, area.size);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(worldPos, 0.2f);
+
+#if UNITY_EDITOR
+            UnityEditor.Handles.color = Color.white;
+            UnityEditor.Handles.Label(worldPos + Vector3.up * 0.6f, $"Zona {i + 1}");
+#endif
         }
     }
 }
