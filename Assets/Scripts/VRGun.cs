@@ -1,77 +1,33 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(XRGrabInteractable))]
-public class XRWeapon : MonoBehaviour
+public class VRGun : MonoBehaviour
 {
-    [Header("Weapon Settings")]
-    [SerializeField] private Transform muzzle;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float fireForce = 20f;
-    [SerializeField] private float fireRate = 0.01f;
-    [SerializeField] private AudioClip fireSound;
+    [Header("Disparo")]
+    public GameObject projectilePrefab;
+    public Transform spawnPoint;
+    public float shootForce = 500f;
 
-    private XRGrabInteractable grabInteractable;
-    private AudioSource audioSource;
-    private float lastFireTime;
+    [Header("Input")]
+    public InputActionProperty triggerAction; // Asigna el gatillo desde el editor
 
-    private void Awake()
+    void Update()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
+        // Si se presiona el gatillo
+        if (triggerAction.action.WasPressedThisFrame())
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            Shoot();
         }
+       
     }
 
-    private void OnEnable()
+    void Shoot()
     {
-        // Suscribirse al evento de activación (gatillo)
-        grabInteractable.activated.AddListener(TriggerPulled);
-    }
-
-    private void OnDisable()
-    {
-        // Desuscribirse del evento para evitar memory leaks
-        grabInteractable.activated.RemoveListener(TriggerPulled);
-    }
-
-    private void TriggerPulled(ActivateEventArgs arg)
-    {
-        // Verificar el rate of fire
-        if (Time.time - lastFireTime < fireRate) return;
-
-        Fire();
-        lastFireTime = Time.time;
-    }
-
-    private void Fire()
-    {
-        if (projectilePrefab == null || muzzle == null)
+        GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            Debug.LogWarning("Projectile prefab or muzzle not assigned!");
-            return;
+            rb.AddForce(spawnPoint.forward * shootForce);
         }
-
-        // Instanciar el proyectil
-        GameObject projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
-
-        // Aplicar fuerza al proyectil
-        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-        if (projectileRb != null)
-        {
-            projectileRb.AddForce(muzzle.forward * fireForce, ForceMode.Impulse);
-        }
-
-        // Reproducir sonido de disparo
-        if (fireSound != null)
-        {
-            audioSource.PlayOneShot(fireSound);
-        }
-
-        // Opcional: agregar efectos de partículas o retroceso aquí
     }
 }
