@@ -20251,25 +20251,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6089838731b1ae6429dc36cf3dd48df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5833126743440001775, guid: 0f193b2d5af6c234580f9b4d57ab918c, type: 3}
+  enemyPrefab1: {fileID: 5833126743440001775, guid: 0f193b2d5af6c234580f9b4d57ab918c, type: 3}
+  enemyPrefab2: {fileID: 5833126743440001775, guid: 251e9cc69dc790c4da80a1269f9814cb, type: 3}
+  enemyPrefab3: {fileID: 5833126743440001775, guid: 9d810e6f831b6f34b82cb0278412623a, type: 3}
   spawnAreas:
   - position: {x: 0, y: 0, z: -20}
     size: {x: 7, y: 7, z: 7}
-  - position: {x: 0, y: 17, z: 0}
+  - position: {x: 0, y: 20, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: 0, y: -17, z: 0}
+  - position: {x: 0, y: -20, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: 17, y: 0, z: 0}
+  - position: {x: 23, y: 0, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: -17, y: 0, z: 0}
+  - position: {x: -23.4, y: 0, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: -12, y: 13, z: 0}
+  - position: {x: -16.3, y: 15.5, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: 12.2, y: 12.9, z: 0}
+  - position: {x: 16.9, y: 14.6, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: -12, y: -10, z: 0}
+  - position: {x: -15.6, y: -10.36, z: 0}
     size: {x: 2, y: 2, z: 0.5}
-  - position: {x: 12, y: -10, z: 0}
+  - position: {x: 14.8, y: -13.56, z: 0}
     size: {x: 2, y: 2, z: 0.5}
   minSpawnInterval: 1
   maxSpawnInterval: 5
