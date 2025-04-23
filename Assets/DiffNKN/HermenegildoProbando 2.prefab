@@ -4263,6 +4263,7 @@ GameObject:
   - component: {fileID: 7031092484091554225}
   - component: {fileID: 5679231848319630698}
   - component: {fileID: 3671171453825686377}
+  - component: {fileID: -7028313780680950319}
   m_Layer: 0
   m_Name: HermenegildoProbando 2
   m_TagString: Enemy
@@ -4325,7 +4326,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4372,6 +4373,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   impactHeightOffset: 0.2
+--- !u!114 &-7028313780680950319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833126743440001775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b4bf4ece83b7047ba07ab2f9291fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 80
 --- !u!1 &5863037430149573049
 GameObject:
   m_ObjectHideFlags: 0

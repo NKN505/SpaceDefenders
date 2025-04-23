@@ -15732,13 +15732,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822612635}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.695, y: 0.319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3832703583497817441}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &831249166
 GameObject:
   m_ObjectHideFlags: 0
@@ -17334,13 +17334,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955705985}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.695, y: 0.319, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 709297095204019161}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &955955534
 Animator:
   serializedVersion: 7
@@ -38276,9 +38276,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709297095204019161}
-  - component: {fileID: 709297095204243450}
   - component: {fileID: 709297095204243452}
   - component: {fileID: 709297095204243454}
+  - component: {fileID: 709297095204243456}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -38286,18 +38286,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &709297095204243450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709297095204243449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb074c9f925c9349b7bf992ebe787cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &709297095204243451
 GameObject:
   m_ObjectHideFlags: 0
@@ -38476,6 +38464,41 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &709297095204243456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709297095204243449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1137e57075e474c887ef9b5627cddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 122648, guid: 11530f2b0a0cd2442949827ecbb622f2, type: 3}
+  spawnPoint: {fileID: 955705986}
+  shootForce: 500
+  triggerAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Trigger
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 51508bba-a060-447b-9411-2f0a18ee7df3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 259ee2d8-5608-4479-b6b6-12c531fff5fa
+        m_Path: <XRController>{RightHand}/trigger
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Trigger
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!33 &709297095205346297
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -42357,7 +42380,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: eb66bbc1-32e7-47f3-a65c-0638c9494ef7
-        m_Path: <XRController>/trigger
+        m_Path: <XRController>{LeftHand}/trigger
         m_Interactions: 
         m_Processors: 
         m_Groups: 
