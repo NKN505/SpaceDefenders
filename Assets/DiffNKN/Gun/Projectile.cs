@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, lifeTime); // Se destruye tras 7 segundos si no impacta nada
+        Destroy(gameObject, lifeTime); // Destruye tras 7 segundos si no impacta nada
     }
 
     void OnTriggerEnter(Collider other)
@@ -21,6 +21,6 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        Destroy(gameObject); // Se destruye al impactar cualquier cosa
+        Destroy(gameObject); // Siempre se destruye al impactar algo
     }
 }

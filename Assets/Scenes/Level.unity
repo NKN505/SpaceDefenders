@@ -20270,7 +20270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1180325767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38939,7 +38939,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6888673074156378065}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9b3d17eeb2e6bc47ada81d8f7f638d8, type: 3}
   m_Name: 
@@ -44996,7 +44996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 122648, guid: 11530f2b0a0cd2442949827ecbb622f2, type: 3}
   spawnPoint: {fileID: 822612636}
-  shootForce: 500
+  shootForce: 50
   triggerAction:
     m_UseReference: 0
     m_Action:
