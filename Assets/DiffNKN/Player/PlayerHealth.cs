@@ -52,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (healthText != null)
         {
-            healthText.text = "+ " + Mathf.CeilToInt(currentHealth).ToString();
+            healthText.text = "+" + Mathf.CeilToInt(currentHealth).ToString();
             healthText.color = (currentHealth <= 20) ? Color.red : Color.green;
         }
     }
