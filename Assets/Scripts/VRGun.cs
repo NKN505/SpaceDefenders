@@ -29,5 +29,6 @@ public class VRGun : MonoBehaviour
         {
             rb.AddForce(spawnPoint.forward * shootForce);
         }
+        Debug.Log("pew Pew");
     }
 }
