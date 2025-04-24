@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 [System.Serializable]
 public class SpawnArea
@@ -28,9 +28,19 @@ public class EnemySpawner : MonoBehaviour
     public LayerMask obstacleMask;
 
     private Vector3 lastSpawnPosition = Vector3.positiveInfinity;
+    private ScoreCount scoreCount;
 
     private void Start()
     {
+        // Obtén la referencia a ScoreCount
+        scoreCount = Object.FindFirstObjectByType<ScoreCount>();
+
+        if (scoreCount == null)
+        {
+            Debug.LogError("No se encontró ScoreCount en la escena.");
+        }
+
+        // Iniciar el proceso de aparición de enemigos
         StartCoroutine(SpawnEnemies());
     }
 
@@ -42,7 +52,24 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject enemyToSpawn = GetRandomEnemyPrefab();
             if (enemyToSpawn != null)
-                Instantiate(enemyToSpawn, spawnPos, Quaternion.identity);
+            {
+                GameObject enemy = Instantiate(enemyToSpawn, spawnPos, Quaternion.identity);
+                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null)
+                {
+                    // Establecer el puntaje del enemigo dependiendo del prefab
+                    if (enemyToSpawn == enemyPrefab1)
+                        enemyHealth.enemyScore = 25;
+                    else if (enemyToSpawn == enemyPrefab2)
+                        enemyHealth.enemyScore = 75;
+                    else if (enemyToSpawn == enemyPrefab3)
+                        enemyHealth.enemyScore = 120;
+
+                    // Suscribirse al evento onDeath
+                    enemyHealth.onDeath += OnEnemyDeath;
+                }
+            }
 
             float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
             yield return new WaitForSeconds(waitTime);
@@ -86,6 +113,26 @@ public class EnemySpawner : MonoBehaviour
 
         lastSpawnPosition = randomPos;
         return randomPos;
+    }
+
+    private void OnEnemyDeath(EnemyHealth enemyHealth)
+    {
+        if (scoreCount != null)
+        {
+            // Obtener la distancia desde el enemigo hasta el punto de muerte
+            float distance = Vector3.Distance(enemyHealth.transform.position, Camera.main.transform.position);
+
+            // Puntaje base del enemigo
+            int score = enemyHealth.enemyScore;
+
+            // Sumar bonus de distancia
+            score += Mathf.CeilToInt(distance);
+
+            // Actualizar el puntaje
+            scoreCount.AddScore(score);
+
+            Debug.Log($"Puntaje del enemigo: {score}");
+        }
     }
 
     private void OnDrawGizmosSelected()
