@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class VRGun : MonoBehaviour
 {
@@ -10,6 +13,13 @@ public class VRGun : MonoBehaviour
 
     [Header("Input")]
     public InputActionProperty triggerAction;
+
+    [Header("Estado del Jugador")]
+    public bool isDead = false;  // Flag para saber si el jugador está muerto
+
+    [Header("Interacción con UI (Raycast)")]
+    public XRRayInteractor rayInteractor;  // Ray Interactor para interactuar con la UI
+    public LayerMask uiLayerMask;  // LayerMask para la UI (si la tienes configurada)
 
     private void OnEnable()
     {
@@ -23,7 +33,11 @@ public class VRGun : MonoBehaviour
 
     void Update()
     {
-        float triggerValue = triggerAction.action.ReadValue<float>();
+        if (isDead)
+        {
+            return; //si el jugador está muerto, no podrá disparar.
+        }
+        float triggerValue = triggerAction.action.ReadValue<float>(); //para leer el valor del gatillo
         Debug.Log("Trigger Value: " + triggerValue);
 
         if (triggerAction.action.WasPressedThisFrame())
@@ -31,6 +45,7 @@ public class VRGun : MonoBehaviour
             Debug.Log("Trigger PRESSED");
             Shoot();
         }
+
     }
 
     void Shoot()
@@ -52,6 +67,22 @@ public class VRGun : MonoBehaviour
         }
 
         Debug.Log("Shooting");
+    }
+
+    private void HandleUIInteraction()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(rayInteractor.transform.position, rayInteractor.transform.forward, out hit, Mathf.Infinity, uiLayerMask))
+        {
+            if(hit.collider.CompareTag("UI_Button"))
+            {
+                var button = hit.collider.GetComponent<UnityEngine.UI.Button>();
+                if (button != null)
+                {
+                    button.onClick.Invoke(); // Invoca el evento del botón
+                }
+            }
+        }
     }
 
     private void OnDrawGizmos()
