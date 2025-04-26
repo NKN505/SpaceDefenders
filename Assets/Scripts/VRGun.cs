@@ -11,6 +11,10 @@ public class VRGun : MonoBehaviour
     public Transform spawnPoint;
     public float shootForce = 150f; // ⚠ Fuerza reducida para evitar atravesar colliders
 
+    [Header("Sonido")]
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+
     [Header("Input")]
     public InputActionProperty triggerAction;
 
@@ -44,6 +48,7 @@ public class VRGun : MonoBehaviour
         {
             Debug.Log("Trigger PRESSED");
             Shoot();
+            
         }
 
     }
@@ -67,6 +72,12 @@ public class VRGun : MonoBehaviour
         }
 
         Debug.Log("Shooting");
+
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f); // Pitch entre 90% y 110%
+            audioSource.PlayOneShot(shootSound);
+        }
     }
 
     private void HandleUIInteraction()
