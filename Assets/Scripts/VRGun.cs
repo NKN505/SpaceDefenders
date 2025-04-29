@@ -75,7 +75,7 @@ public class VRGun : MonoBehaviour
 
         if (audioSource != null && shootSound != null)
         {
-            audioSource.pitch = Random.Range(0.9f, 1.1f); // Pitch entre 90% y 110%
+            audioSource.pitch = Random.Range(0.8f, 1.2f); // Pitch entre 80% y 120%. Diferente tono según disparo de forma aleatoria
             audioSource.PlayOneShot(shootSound);
         }
     }

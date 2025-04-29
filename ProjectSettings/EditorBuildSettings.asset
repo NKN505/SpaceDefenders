@@ -13,13 +13,16 @@ EditorBuildSettings:
     guid: 151af85d8fb621145816766b73ce269f
   - enabled: 1
     path: Assets/Scenes/Creditos.unity
-    guid: aec21d047078f7649ac4cab66b0dc52a
+    guid: 8cecdd718fa70a540a1c5adc6039dd6d
   - enabled: 1
     path: "Assets/Scenes/Introducci\xF3n.unity"
     guid: db53789ac7e6f9345bdd5d4725dc5c1f
   - enabled: 1
     path: Assets/Scenes/Level.unity
     guid: 4e9fef26e6adb88479ad1b9834a32d94
+  - enabled: 0
+    path: Assets/Scenes/Prueba.unity
+    guid: 63bf66c9c9e8b4743971e34c82619041
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
