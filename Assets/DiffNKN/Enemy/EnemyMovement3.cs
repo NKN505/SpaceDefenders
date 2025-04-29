@@ -18,7 +18,18 @@ public class EnemyMovement3 : MonoBehaviour
     {
         if (player != null)
         {
+            // Movimiento hacia el jugador
             transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+
+            // Rotación para mirar al jugador (sin inclinación vertical)
+            Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0f;
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
         }
     }
 

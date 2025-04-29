@@ -6,13 +6,13 @@ public class EnemyMovement : MonoBehaviour
     private Transform player;
     private bool hasDamaged = false;
 
-    // Define la altura a la que quieres que los enemigos impacten (por ejemplo, al nivel del pecho)
-    public float impactHeightOffset = 0.2f;  // Ajusta esto según la altura del jugador
+    // Altura de impacto respecto al centro del jugador
+    public float impactHeightOffset = 0.2f;
 
     private void Start()
     {
         if (Camera.main != null)
-            player = Camera.main.transform; // Asegura que haya cámara principal
+            player = Camera.main.transform;
     }
 
     private void Update()
@@ -21,6 +21,15 @@ public class EnemyMovement : MonoBehaviour
         {
             // Movimiento hacia el jugador
             transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+
+            // Orientación del enemigo hacia el jugador (sin cambiar el eje Y del enemigo)
+            Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0f; // Para evitar inclinación vertical
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Rotación suave
+            }
         }
     }
 
@@ -37,11 +46,10 @@ public class EnemyMovement : MonoBehaviour
             {
                 int damageAmount = Random.Range(1, 6); // Daño aleatorio 1-5
 
-                // Ajusta la posición de impacto a una altura más baja en el jugador
+                // Altura ajustada para el impacto
                 Vector3 targetPosition = playerHealth.transform.position;
-                targetPosition.y -= impactHeightOffset;  // Baja la altura para impactar el cuerpo, no la cabeza
+                targetPosition.y -= impactHeightOffset;
 
-                // Dirección hacia la nueva posición de impacto
                 Vector3 hitDirection = (targetPosition - transform.position).normalized;
 
                 if (playerArmor != null)
@@ -56,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
                 Debug.Log($"Daño aplicado: {damageAmount}");
             }
 
-            Destroy(gameObject); // Eliminar enemigo después del impacto
+            Destroy(gameObject);
         }
     }
 }
