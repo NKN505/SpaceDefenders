@@ -1,0 +1,655 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &87379849397074925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3061704888336226771, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3952987509719765431}
+  - component: {fileID: 909484711015000171}
+  m_Layer: 0
+  m_Name: UCX_SciFiDrone08_04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3952987509719765431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4002472182274419715, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87379849397074925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710695, y: 0.00000016858742, z: 0.00000016858736, w: 0.70710665}
+  m_LocalPosition: {x: 0.000000014715448, y: -0.21594252, z: -0.055138763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6407336537812516529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &909484711015000171
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2812035086581222193, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87379849397074925}
+  m_Material: {fileID: 13400000, guid: 0d00fdbfb7b9ca44a8def167d35d090d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 982422894852190515, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+--- !u!1 &1554676648261367426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4218657526724958165, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4163188170424741472}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4163188170424741472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554676648261367426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000057601163, y: -0.00000005760116, z: -0.70710677, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6407336537812516529}
+  - {fileID: 6280626249785613719}
+  - {fileID: 121356026496500174}
+  m_Father: {fileID: 8259439904806992463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1885517414316193187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8350632452480246773}
+  - component: {fileID: 2065691996573232630}
+  m_Layer: 0
+  m_Name: SciFiDrone08
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8350632452480246773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885517414316193187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.972, y: 0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8259439904806992463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2065691996573232630
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885517414316193187}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b376ce6e434ce9b4eb5ebe3a9e65db98, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 5114105644734841598, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+  m_Bones:
+  - {fileID: 4163188170424741472}
+  - {fileID: 6407336537812516529}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 4163188170424741472}
+  m_AABB:
+    m_Center: {x: -0.03007266, y: -0.000000059604645, z: 0.17651302}
+    m_Extent: {x: 0.36805412, y: 0.8963831, z: 0.97197884}
+  m_DirtyAABB: 0
+--- !u!1 &3129970431192676090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8259439904806992463}
+  - component: {fileID: 6656690416921939332}
+  - component: {fileID: -7651194901779587915}
+  - component: {fileID: 6087965796004360086}
+  - component: {fileID: -3201504263147532593}
+  m_Layer: 0
+  m_Name: III
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8259439904806992463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129970431192676090}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.1248, y: -3.1956, z: -0.059422}
+  m_LocalScale: {x: 1.1186864, y: 1.1186864, z: 1.1186864}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4163188170424741472}
+  - {fileID: 8350632452480246773}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6656690416921939332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129970431192676090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b4bf4ece83b7047ba07ab2f9291fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  enemyScore: 0
+--- !u!54 &-7651194901779587915
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129970431192676090}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &6087965796004360086
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129970431192676090}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.111385, y: 0.8820087, z: 2.1497042}
+  m_Center: {x: 0.0065534096, y: 0.00742942, z: 0.15476784}
+--- !u!114 &-3201504263147532593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129970431192676090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce797bfbd625e4f4a9f3745d879e9b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  impactHeightOffset: 0.2
+--- !u!1 &4494515823229570823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8498145606033608608, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821184298085752495}
+  - component: {fileID: 7874856420766987816}
+  m_Layer: 0
+  m_Name: UCX_SciFiDrone08_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &821184298085752495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 712841832393527371, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494515823229570823}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710695, y: 0.00000016858742, z: 0.00000016858736, w: 0.70710665}
+  m_LocalPosition: {x: 0.000000014715448, y: -0.21594252, z: -0.055138763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6407336537812516529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &7874856420766987816
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2803696881498780423, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494515823229570823}
+  m_Material: {fileID: 13400000, guid: 0d00fdbfb7b9ca44a8def167d35d090d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8426848926998504145, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+--- !u!1 &4623096794237419793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4999857259521952372, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3689109296693272225}
+  - component: {fileID: 757446612899232166}
+  m_Layer: 0
+  m_Name: UCX_SciFiDrone08_05
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3689109296693272225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8988421907058447615, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4623096794237419793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710695, y: 0.00000016858742, z: 0.00000016858736, w: 0.70710665}
+  m_LocalPosition: {x: 0.000000014715448, y: -0.21594252, z: -0.055138763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6407336537812516529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &757446612899232166
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5822517245954750865, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4623096794237419793}
+  m_Material: {fileID: 13400000, guid: 0d00fdbfb7b9ca44a8def167d35d090d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5546399380362985313, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+--- !u!1 &5437873375890403743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1822990173124593949, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3094700048463182589}
+  - component: {fileID: 4730440556170013629}
+  m_Layer: 0
+  m_Name: UCX_SciFiDrone08_06
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3094700048463182589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6848462951066739141, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437873375890403743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710695, y: 0.00000016858742, z: 0.00000016858736, w: 0.70710665}
+  m_LocalPosition: {x: 0.000000014715448, y: -0.21594252, z: -0.055138763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6407336537812516529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4730440556170013629
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1337349655227211072, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437873375890403743}
+  m_Material: {fileID: 13400000, guid: 0d00fdbfb7b9ca44a8def167d35d090d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3855325971390739431, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+--- !u!1 &5439161666402442487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1029514028573316616, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6280626249785613719}
+  - component: {fileID: 6655293847958062182}
+  m_Layer: 0
+  m_Name: UCX_SciFiDrone08_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6280626249785613719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 559527970358325020, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5439161666402442487}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000000842937, y: 0.00000008429372, z: 0.7071068, w: 0.7071067}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4163188170424741472}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6655293847958062182
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4151575637905316262, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5439161666402442487}
+  m_Material: {fileID: 13400000, guid: 0d00fdbfb7b9ca44a8def167d35d090d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4482690947360000092, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+--- !u!1 &5689208935133611662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7702393895043110591, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121356026496500174}
+  - component: {fileID: 3259928592185319063}
+  m_Layer: 0
+  m_Name: UCX_SciFiDrone08_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121356026496500174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1261262937166025290, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5689208935133611662}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000000842937, y: 0.00000008429372, z: 0.7071068, w: 0.7071067}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4163188170424741472}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &3259928592185319063
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3691734090636480302, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5689208935133611662}
+  m_Material: {fileID: 13400000, guid: 0d00fdbfb7b9ca44a8def167d35d090d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5400424686158990281, guid: 36ab0325dfea1b54592aace542a14100, type: 3}
+--- !u!1 &5821841049618508715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4348718045881089764, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6407336537812516529}
+  m_Layer: 0
+  m_Name: Guns
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6407336537812516529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6503297133771545442, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+  m_PrefabInstance: {fileID: 5740139312955220161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5821841049618508715}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: 0.5000001, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: -0.055138744, y: 0, z: -0.21594253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 821184298085752495}
+  - {fileID: 3952987509719765431}
+  - {fileID: 3689109296693272225}
+  - {fileID: 3094700048463182589}
+  m_Father: {fileID: 4163188170424741472}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5740139312955220161
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8259439904806992463}
+    m_Modifications:
+    - target: {fileID: 4218657526724958165, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_Name
+      value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000057601163
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000005760116
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829746735890617136, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6c6c1689c98ca0c44a0af1933419ac68, type: 3}

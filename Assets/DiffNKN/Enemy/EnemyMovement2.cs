@@ -18,7 +18,18 @@ public class EnemyMovement2 : MonoBehaviour
     {
         if (player != null)
         {
+            // Movimiento hacia el jugador
             transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+
+            // Orientación hacia el jugador (sin inclinarse verticalmente)
+            Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0f; // Evita que el enemigo se incline hacia arriba o abajo
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
         }
     }
 
@@ -33,7 +44,7 @@ public class EnemyMovement2 : MonoBehaviour
 
             if (playerHealth != null)
             {
-                int damageAmount = Random.Range(6, 11); // Daño aleatorio entre 6 y 10 (11 es exclusivo)
+                int damageAmount = Random.Range(6, 11); // Daño aleatorio entre 6 y 10
 
                 Vector3 targetPosition = playerHealth.transform.position;
                 targetPosition.y -= impactHeightOffset;
