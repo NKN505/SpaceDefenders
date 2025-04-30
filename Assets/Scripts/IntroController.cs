@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class IntroController : MonoBehaviour
 {
-    public TMP_InputField nameInput; // Asume que usas TextMeshPro
+    public TMP_InputField nameInput;
     public void OnStartGame()
     {
         GameManager.Instance.playerName = nameInput.text;
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level");
     }
 }

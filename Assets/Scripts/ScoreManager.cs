@@ -50,7 +50,24 @@ public class ScoreManager : MonoBehaviour
         string json = PlayerPrefs.GetString(SaveKey, "");
         if (!string.IsNullOrEmpty(json))
         {
-            topScores = JsonUtility.FromJson<ScoreListWrapper>(json).scores;
+            var wrapper = JsonUtility.FromJson<ScoreListWrapper>(json);
+            if (wrapper != null && wrapper.scores != null)
+            {
+                topScores = wrapper.scores;
+                Debug.Log("Top Scores cargados:");
+                foreach (var s in topScores)
+                {
+                    Debug.Log($"{s.name} - {s.score}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No se pudo deserializar el wrapper o lista vacía");
+            }
+        }
+        else
+        {
+            Debug.Log("No hay datos previos guardados en PlayerPrefs.");
         }
     }
 
