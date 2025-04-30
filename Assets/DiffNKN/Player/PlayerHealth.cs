@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (damageUI != null)
             damageUI.DisableIndicators();
-       
+
     }
 
     public void TakeDamage(float amount, Vector3 hitDirection)
@@ -59,6 +60,10 @@ public class PlayerHealth : MonoBehaviour
                 }
             }
 
+            // Espera 5 segundos y después vuelves a la escena principal
+
+            StartCoroutine(ReinicioPausa(5f));
+
         }
     }
 
@@ -69,5 +74,14 @@ public class PlayerHealth : MonoBehaviour
             healthText.text = "  +" + Mathf.CeilToInt(currentHealth).ToString();
             healthText.color = (currentHealth <= 20) ? Color.red : Color.green;
         }
+    }
+
+    private IEnumerator ReinicioPausa(float delay)
+    {
+        // Esperamos en tiempo real (ya que Time.timeScale = 0f)
+        yield return new WaitForSecondsRealtime(delay);
+
+        Time.timeScale = 1f; // Restauramos el tiempo
+        SceneManager.LoadScene("Portada"); // Cambia "MainMenu" por el nombre real de tu escena principal
     }
 }
