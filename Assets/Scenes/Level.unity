@@ -68314,13 +68314,10 @@ MonoBehaviour:
   enemyScore: 0
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
-<<<<<<< HEAD
-=======
   explosionPrefab: {fileID: 0}
   explosionSound: {fileID: 0}
   explosionSoundVolume: 1
   explosionSoundRange: 20
->>>>>>> nknwork
 --- !u!1 &7334165697557438315
 GameObject:
   m_ObjectHideFlags: 0
