@@ -7228,6 +7228,10 @@ MonoBehaviour:
   healthText: {fileID: 1489037176}
   damageUI: {fileID: 1180325771}
   deathScreen: {fileID: 1824548771}
+  damageSound: {fileID: 8300000, guid: f7efc070b96307c4d8b6a9960cd3ec46, type: 3}
+  damageVolume: 0.75
+  deathSound: {fileID: 8300000, guid: 39f060b0f82632f4cb73c47578d5252e, type: 3}
+  deathVolume: 6
   vrGuns:
   - {fileID: 3194553193343997535}
   - {fileID: 1656801536}
@@ -7269,6 +7273,8 @@ MonoBehaviour:
   armorText: {fileID: 598307200}
   armorSymbol: {fileID: 267742007}
   armorCanvas: {fileID: 0}
+  armorPickupSound: {fileID: 8300000, guid: a3c7fab26766e3a42b6f068a21dac3cd, type: 3}
+  armorPickupVolume: 2
 --- !u!1 &339699302
 GameObject:
   m_ObjectHideFlags: 0
@@ -68308,6 +68314,13 @@ MonoBehaviour:
   enemyScore: 0
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
+<<<<<<< HEAD
+=======
+  explosionPrefab: {fileID: 0}
+  explosionSound: {fileID: 0}
+  explosionSoundVolume: 1
+  explosionSoundRange: 20
+>>>>>>> nknwork
 --- !u!1 &7334165697557438315
 GameObject:
   m_ObjectHideFlags: 0

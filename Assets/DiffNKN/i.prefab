@@ -150,9 +150,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  flashDuration: 0.1
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
   enemyScore: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
+  explosionPrefab: {fileID: 8263042793314324160, guid: 573f6443cde117643aaae351398579f2, type: 3}
+  explosionSound: {fileID: 8300000, guid: 69d5ebb9a98dcb548a869236abd99f13, type: 3}
+  explosionSoundVolume: 30
+  explosionSoundRange: 5
 --- !u!54 &1625334368041216233
 Rigidbody:
   m_ObjectHideFlags: 0
