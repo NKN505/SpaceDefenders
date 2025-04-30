@@ -87,6 +87,12 @@ public class PlayerHealth : MonoBehaviour
                     gun.isDead = true;
             }
 
+            
+            //guardamos puntuación
+            int finalScore = GameManager.Instance.playerScore; // o tu método de cálculo
+            ScoreManager.Instance.SaveScore(GameManager.Instance.playerName, finalScore);
+
+
             // Espera 5 segundos y después vuelves a la escena principal
 
             StartCoroutine(ReinicioPausa(5f));
