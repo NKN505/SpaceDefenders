@@ -11,7 +11,6 @@ public class ArmaduraPickup : MonoBehaviour
 
     private void Start()
     {
-        // Cacheamos referencias al inicio
         pickupCollider = GetComponent<Collider>();
         pickupRenderer = GetComponent<Renderer>();
     }
@@ -29,14 +28,19 @@ public class ArmaduraPickup : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-        // Ocultamos el objeto
         pickupCollider.enabled = false;
         pickupRenderer.enabled = false;
 
         yield return new WaitForSeconds(respawnTime);
 
-        // Volvemos a activar el objeto
         pickupCollider.enabled = true;
         pickupRenderer.enabled = true;
+    }
+
+    // 🟠 Gizmo visible solo cuando el objeto está seleccionado
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0.2f, 0.8f, 1f, 0.4f);
+        Gizmos.DrawWireSphere(transform.position, 1f); // valor fijo ya que el rango sonoro se eliminó
     }
 }

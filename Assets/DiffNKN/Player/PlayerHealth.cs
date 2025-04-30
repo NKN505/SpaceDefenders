@@ -5,12 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Salud")]
     public float maxHealth = 100f;
     private float currentHealth;
-    public TextMeshProUGUI healthText;   // Texto que muestra la salud
-    public DamageDirectionUI damageUI;   // UI para la dirección del daño
-    public Image deathScreen;            // Imagen de la pantalla de muerte
-    public VRGun[] vrGuns;                  // Referencia al script VRGun de las pistolas
+
+    [Header("UI")]
+    public TextMeshProUGUI healthText;
+    public DamageDirectionUI damageUI;
+    public Image deathScreen;
+
+    [Header("Audio")]
+    public AudioClip damageSound;
+    [Range(0f, 1f)] public float damageVolume = 1f;
+
+    public AudioClip deathSound;
+    [Range(0f, 10f)] public float deathVolume = 1f;
+
+    public VRGun[] vrGuns;
+
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -22,7 +35,13 @@ public class PlayerHealth : MonoBehaviour
 
         if (damageUI != null)
             damageUI.DisableIndicators();
-       
+
+        // Agrega AudioSource si no existe
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.spatialBlend = 0f; // 2D sound
     }
 
     public void TakeDamage(float amount, Vector3 hitDirection)
@@ -31,17 +50,27 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthUI();
 
-        // Muestra siempre indicador de salud (rojo)
+        // Reproduce sonido de daño si aún queda salud
+        if (damageSound != null && currentHealth > 0)
+            audioSource.PlayOneShot(damageSound, damageVolume);
+
+        // Muestra dirección del daño
         if (damageUI != null && hitDirection != Vector3.zero)
             damageUI.ShowDirection(hitDirection, transform, true);
 
         if (currentHealth <= 0)
         {
             Debug.Log("¡Has muerto!");
+
+            if (deathSound != null)
+                audioSource.PlayOneShot(deathSound, deathVolume);
+
             if (deathScreen != null)
                 deathScreen.gameObject.SetActive(true);
+
             if (damageUI != null)
                 damageUI.DisableIndicators();
+
             if (healthText != null)
                 healthText.gameObject.SetActive(false);
 
@@ -49,16 +78,13 @@ public class PlayerHealth : MonoBehaviour
             if (armor != null)
                 armor.HideArmorUI();
 
-            Time.timeScale = 0f; //pausamos el juego por completo
+            Time.timeScale = 0f;
 
             foreach (VRGun gun in vrGuns)
             {
                 if (gun != null)
-                {
-                    gun.isDead = true;  // Deja de disparar en ambas pistolas
-                }
+                    gun.isDead = true;
             }
-
         }
     }
 

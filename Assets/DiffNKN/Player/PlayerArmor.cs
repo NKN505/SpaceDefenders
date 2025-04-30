@@ -13,26 +13,37 @@ public class PlayerArmor : MonoBehaviour
     public TextMeshProUGUI armorSymbol;
     public Canvas armorCanvas;
 
+    [Header("Audio")]
+    public AudioClip armorPickupSound;
+    public float armorPickupVolume = 1f;
+
+    private AudioSource audioSource;
+
     private void Start()
     {
         armor = Mathf.Clamp(armor, 0, maxArmor);
         UpdateArmorUI();
+
+        // Asegura un AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.spatialBlend = 0f; // Sonido 2D
     }
 
     public void AbsorbDamage(float damageAmount, PlayerHealth playerHealth, Vector3 hitDirection)
     {
         if (playerHealth == null) return;
 
-        int damage = Mathf.CeilToInt(damageAmount); // Sin decimales
+        int damage = Mathf.CeilToInt(damageAmount);
 
-        // 20% de probabilidad de absorber todo el daño
         if (Random.value <= 0.2f && armor >= damage)
         {
             armor -= damage;
             UpdateArmorUI();
             Debug.Log($"Armadura absorbió el 100% del daño: {damage} puntos.");
 
-            // Mostrar feedback amarillo
             if (playerHealth.damageUI != null)
                 playerHealth.damageUI.ShowDirection(hitDirection, playerHealth.transform, false);
 
@@ -42,7 +53,7 @@ public class PlayerArmor : MonoBehaviour
         if (armor > 0)
         {
             int half = Mathf.CeilToInt(damage * 0.5f);
-            int damageToAbsorb = Mathf.Min(half, Mathf.FloorToInt(armor)); // Sin decimales
+            int damageToAbsorb = Mathf.Min(half, Mathf.FloorToInt(armor));
 
             armor -= damageToAbsorb;
             UpdateArmorUI();
@@ -70,6 +81,11 @@ public class PlayerArmor : MonoBehaviour
         armor += amount;
         armor = Mathf.Clamp(armor, 0, maxArmor);
         Debug.Log($"Armadura obtenida. Valor actual: {armor}");
+
+        // ▶️ Reproduce sonido
+        if (armorPickupSound != null)
+            audioSource.PlayOneShot(armorPickupSound, armorPickupVolume);
+
         UpdateArmorUI();
     }
 

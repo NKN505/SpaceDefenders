@@ -7224,10 +7224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b0c8cb073f9ea499a98eba44021282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 25
   healthText: {fileID: 1489037176}
   damageUI: {fileID: 1180325771}
   deathScreen: {fileID: 1824548771}
+  damageSound: {fileID: 8300000, guid: f7efc070b96307c4d8b6a9960cd3ec46, type: 3}
+  damageVolume: 0.75
+  deathSound: {fileID: 8300000, guid: 39f060b0f82632f4cb73c47578d5252e, type: 3}
+  deathVolume: 6
   vrGuns:
   - {fileID: 3194553193343997535}
   - {fileID: 1656801536}
@@ -7269,6 +7273,8 @@ MonoBehaviour:
   armorText: {fileID: 598307200}
   armorSymbol: {fileID: 267742007}
   armorCanvas: {fileID: 0}
+  armorPickupSound: {fileID: 8300000, guid: a3c7fab26766e3a42b6f068a21dac3cd, type: 3}
+  armorPickupVolume: 2
 --- !u!1 &339699302
 GameObject:
   m_ObjectHideFlags: 0
@@ -39983,8 +39989,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4876374420408559453}
-  - component: {fileID: 3055811265677236753}
+  - component: {fileID: 17233023529723818}
   m_Layer: 0
   m_Name: UCX_SciFiDrone08_06
   m_TagString: Untagged
@@ -39992,6 +39997,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &17233023529723818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17233023529723817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &33133441023778397
 GameObject:
   m_ObjectHideFlags: 0
@@ -42334,7 +42354,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3564470174705534864}
+  - component: {fileID: 610581347844970966}
   m_Layer: 0
   m_Name: RightUp1
   m_TagString: Untagged
@@ -42342,6 +42362,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &610581347844970966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610581347844970965}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &629420128024789553
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -46572,16 +46607,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6985419011125097135, guid: f749b28140743be45a9055256c05b075, type: 3}
   m_PrefabInstance: {fileID: 7749242129869702249}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357258802253421799}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.6163445, y: -4.318, z: -0.032640457}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2864779335725017996}
-  m_Father: {fileID: 752845072}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1845951501132767836
 Transform:
   m_ObjectHideFlags: 0
@@ -49440,16 +49465,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8259439904806992463, guid: a43de9399c4615240a2caaf2e43e0df8, type: 3}
   m_PrefabInstance: {fileID: 1423048586179827929}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434765077643299523}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1263447, y: -3.148, z: -0.032640457}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1927244545243364776}
-  m_Father: {fileID: 752845072}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2657524068420351642
 Transform:
   m_ObjectHideFlags: 0
@@ -68420,6 +68435,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 40
   enemyScore: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
+  explosionPrefab: {fileID: 0}
+  explosionSound: {fileID: 0}
+  explosionSoundVolume: 1
+  explosionSoundRange: 20
 --- !u!1 &7334165697557438315
 GameObject:
   m_ObjectHideFlags: 0
@@ -70364,16 +70385,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2909084357882228236, guid: f49974cdf8df8124f8ccad805898f904, type: 3}
   m_PrefabInstance: {fileID: 870285184345240170}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7276049896296420505}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.0363445, y: 2.516, z: -0.032640457}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5903646011407377394}
-  m_Father: {fileID: 752845072}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8048610348865397896
 Transform:
   m_ObjectHideFlags: 0
@@ -75046,6 +75057,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 17233023529723818}
+  - {fileID: 610581347844970966}
   - {fileID: 8077657573007942189}
   - {fileID: 6888673074156378066}
   - {fileID: 756192408}
