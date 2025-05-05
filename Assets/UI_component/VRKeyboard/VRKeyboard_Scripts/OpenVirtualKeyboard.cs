@@ -76,4 +76,10 @@ public class OpenVirtualKeyboard : MonoBehaviour
         OnCloseVirtualKeyboard();
         // Aquí podrías cargar la siguiente escena
     }
+
+    public void SetInputField(TMP_InputField field)
+    {
+        inputField = field;
+        inputField.ActivateInputField();
+    }
 }
