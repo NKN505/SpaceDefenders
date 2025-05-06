@@ -151,11 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreContainer: {fileID: 1207174527}
   scoreEntryPrefab: {fileID: 3395208188743042007, guid: b7c55e62a2962c4429feaf4bba89c171, type: 3}
-  firstPlaceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  secondPlaceColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  thirdPlaceColor: {r: 0.8, g: 0.5, b: 0.2, a: 1}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  top3SizeBoost: 1.2
 --- !u!114 &948026354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,7 +638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -496, y: 411}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207174528
