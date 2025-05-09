@@ -8,6 +8,6 @@ public class IntroController : MonoBehaviour
     public void OnStartGame()
     {
         GameManager.Instance.playerName = nameInput.text;
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene(2);
     }
 }

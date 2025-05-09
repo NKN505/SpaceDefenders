@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0cfa5633ff999e04099fa6b7e1a86fde
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 291119
+  packageName: VR Keyboard
+  packageVersion: 1.0.0
+  assetPath: Assets/VRKeyboard/Prefabs/KeyboardEnglish.prefab
+  uploadId: 687358
