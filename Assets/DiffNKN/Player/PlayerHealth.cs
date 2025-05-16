@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     [Range(0f, 1f)] public float damageVolume = 1f;
 
     public AudioClip deathSound;
-    [Range(0f, 10f)] public float deathVolume = 1f;
+    [Range(0f, 1f)] public float deathVolume = 1f;
 
     public VRGun[] vrGuns;
 
@@ -37,12 +37,11 @@ public class PlayerHealth : MonoBehaviour
         if (damageUI != null)
             damageUI.DisableIndicators();
 
-        // Agrega AudioSource si no existe
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
 
-        audioSource.spatialBlend = 0f; // 2D sound
+        audioSource.spatialBlend = 0f; // Sonido 2D
     }
 
     public void TakeDamage(float amount, Vector3 hitDirection)
@@ -51,11 +50,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthUI();
 
-        // Reproduce sonido de daño si aún queda salud
         if (damageSound != null && currentHealth > 0)
             audioSource.PlayOneShot(damageSound, damageVolume);
 
-        // Muestra dirección del daño
         if (damageUI != null && hitDirection != Vector3.zero)
             damageUI.ShowDirection(hitDirection, transform, true);
 
@@ -87,16 +84,19 @@ public class PlayerHealth : MonoBehaviour
                     gun.isDead = true;
             }
 
-            
-            //guardamos puntuación
-            int finalScore = GameManager.Instance.playerScore; // o tu método de cálculo
-            ScoreManager.Instance.SaveScore(GameManager.Instance.playerName, finalScore);
+            // Guardar puntuación local
+            int finalScore = GameDataManager.Instance.playerScore;
+            ScoreManager.Instance.SaveScore(GameDataManager.Instance.playerName, finalScore);
 
+            // Subir puntuación a Supabase
+            ScoreUploader uploader = FindObjectOfType<ScoreUploader>();
+            if (uploader != null)
+                uploader.EnviarPuntuacion(GameDataManager.Instance.playerName, finalScore);
+            else
+                Debug.LogWarning("ScoreUploader no encontrado en la escena. No se pudo subir la puntuación.");
 
-            // Espera 5 segundos y después vuelves a la escena principal
-
+            // Reiniciar después de unos segundos
             StartCoroutine(ReinicioPausa(5f));
-
         }
     }
 
@@ -111,10 +111,8 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator ReinicioPausa(float delay)
     {
-        // Esperamos en tiempo real (ya que Time.timeScale = 0f)
         yield return new WaitForSecondsRealtime(delay);
-
-        Time.timeScale = 1f; // Restauramos el tiempo
-        SceneManager.LoadScene("Portada"); // Cambia "MainMenu" por el nombre real de tu escena principal
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Portada"); // Cambia "Portada" si tu escena principal se llama diferente
     }
 }

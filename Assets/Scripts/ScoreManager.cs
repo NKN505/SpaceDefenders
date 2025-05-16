@@ -62,7 +62,7 @@ public class ScoreManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No se pudo deserializar el wrapper o lista vacía");
+                Debug.LogWarning("No se pudo deserializar el wrapper o lista vacÃ­a");
             }
         }
         else
