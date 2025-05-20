@@ -7229,9 +7229,9 @@ MonoBehaviour:
   damageUI: {fileID: 1180325771}
   deathScreen: {fileID: 1824548771}
   damageSound: {fileID: 8300000, guid: f7efc070b96307c4d8b6a9960cd3ec46, type: 3}
-  damageVolume: 0.8
+  damageVolume: 1
   deathSound: {fileID: 8300000, guid: 39f060b0f82632f4cb73c47578d5252e, type: 3}
-  deathVolume: 6
+  deathVolume: 7
   vrGuns:
   - {fileID: 3194553193343997535}
   - {fileID: 1656801536}

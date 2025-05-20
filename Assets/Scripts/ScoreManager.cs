@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadScores();
+            InitializeScores();
         }
         else
         {
@@ -31,11 +31,49 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    void InitializeScores()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("Sin conexión. Usando ranking local.");
+            LoadScores();
+        }
+        else
+        {
+            LoadOnlineTopScores();
+        }
+    }
+
+    /// <summary>
+    /// Guarda una puntuación (local + online).
+    /// </summary>
     public void SaveScore(string name, int score)
     {
+        // 1) Guardar localmente
         topScores.Add(new ScoreEntry { name = name, score = score });
-        topScores = topScores.OrderByDescending(s => s.score).Take(MaxTopScores).ToList();
+        topScores = topScores
+            .OrderByDescending(s => s.score)
+            .Take(MaxTopScores)
+            .ToList();
         SaveScoresToPrefs();
+
+        // 2) Guardar online (no await para no bloquear la UI)
+        _ = OnlineScoreManager.SaveScoreOnline(name, score);
+    }
+
+    /// <summary>
+    /// Carga las 10 mejores puntuaciones desde Talo y reemplaza la lista local.
+    /// </summary>
+    public async void LoadOnlineTopScores()
+    {
+        var onlineTop = await OnlineScoreManager.GetTopScoresAsync();
+        topScores = onlineTop;
+
+        Debug.Log("Top Scores Online:");
+        foreach (var entry in topScores)
+        {
+            Debug.Log($"{entry.name}: {entry.score}");
+        }
     }
 
     void SaveScoresToPrefs()
@@ -54,7 +92,7 @@ public class ScoreManager : MonoBehaviour
             if (wrapper != null && wrapper.scores != null)
             {
                 topScores = wrapper.scores;
-                Debug.Log("Top Scores cargados:");
+                Debug.Log("Top Scores cargados localmente:");
                 foreach (var s in topScores)
                 {
                     Debug.Log($"{s.name} - {s.score}");

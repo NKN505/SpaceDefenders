@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 9bab041a7e9264b0b81d554a2622d9de
+AssetOrigin:
+  serializedVersion: 1
+  productId: 292832
+  packageName: Talo Game Services
+  packageVersion: 0.39.0
+  assetPath: Assets/Talo Game Services/Talo/Runtime/SocketResponses/PlayerPresenceUpdatedResponse.cs
+  uploadId: 755840

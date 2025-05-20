@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 49eb14c6c89ac4ec188ea88b6f25ea7c
+AssetOrigin:
+  serializedVersion: 1
+  productId: 292832
+  packageName: Talo Game Services
+  packageVersion: 0.39.0
+  assetPath: Assets/Talo Game Services/Talo/Runtime/SocketResponses/SocketError.cs
+  uploadId: 755840
