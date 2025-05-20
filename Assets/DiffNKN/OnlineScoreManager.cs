@@ -6,26 +6,28 @@ using TaloGameServices;
 
 public static class OnlineScoreManager
 {
-    private const string leaderboardName = "Score";
-    private const int MaxHistorico = 50;
+    private const string leaderboardName = "Score";    // Debe coincidir EXACTAMENTE con el Internal Name del leaderboard en Talo
     private const int TopVisibles = 10;
 
     /// <summary>
-    /// Guarda una puntuación online en Talo (con la propiedad "playerName").
+    /// Envía la puntuación al leaderboard “Score” de Talo. 
+    /// Lanza excepción si no hay sesión identificada.
     /// </summary>
     public static async Task SaveScoreOnline(string name, int score)
     {
         try
         {
-            // Asegurarnos de que el jugador está identificado en Talo
+            // Verificar que Player ha sido identificado (lanzará excepción si no)
             Talo.IdentityCheck();
 
-            // Añadir la entrada al leaderboard enviando la propiedad "playerName"
+            // Llamada asíncrona para añadir la entrada
             await Talo.Leaderboards.AddEntry(
                 leaderboardName,
                 score,
                 ("playerName", name)
             );
+
+            Debug.Log($"Puntuación online guardada: {name} - {score}");
         }
         catch (System.Exception e)
         {
@@ -34,7 +36,7 @@ public static class OnlineScoreManager
     }
 
     /// <summary>
-    /// Obtiene las 10 mejores puntuaciones del leaderboard "global_leaderboard".
+    /// Recupera el Top 10 del leaderboard “Score” desde Talo.
     /// </summary>
     public static async Task<List<ScoreEntry>> GetTopScoresAsync()
     {
@@ -42,23 +44,22 @@ public static class OnlineScoreManager
 
         try
         {
-            // Recuperar la primera página (hasta 50 entradas) desde Talo
-            LeaderboardEntriesResponse response =
-                await Talo.Leaderboards.GetEntries(leaderboardName, new GetEntriesOptions { page = 0 });
+            // Obtener la primera página (hasta 50 entradas) desde Talo
+            var response = await Talo.Leaderboards.GetEntries(
+                leaderboardName,
+                new GetEntriesOptions { page = 0 }
+            );
 
             if (response.entries == null)
                 return listado;
 
-            // De todas las entradas, mapear a ScoreEntry (usando la clase definida en ScoreManager.cs)
             listado = response.entries
                 .Select(e => new ScoreEntry
                 {
-                    name = e.GetProp("playerName", "SinNombre"),
+                    name  = e.GetProp("playerName", "SinNombre"),
                     score = (int)e.score
                 })
-                // Ordenar descendente por puntuación
                 .OrderByDescending(se => se.score)
-                // Tomar sólo las 10 mejores
                 .Take(TopVisibles)
                 .ToList();
         }

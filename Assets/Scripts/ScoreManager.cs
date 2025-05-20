@@ -1,29 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-
-[System.Serializable]
-public class ScoreEntry
-{
-    public string name;
-    public int score;
-}
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
-    private const int MaxTopScores = 10;
-    private const string SaveKey = "TopScores";
+    public static ScoreManager Instance { get; private set; }
 
     public List<ScoreEntry> topScores = new List<ScoreEntry>();
 
-    void Awake()
+    private const string PlayerPrefsKey = "TopScores";
+
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeScores();
+            LoadScores();
         }
         else
         {
@@ -31,87 +23,70 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    void InitializeScores()
+    /// <summary>
+    /// Añade la puntuación a la lista local (ordenada) y la persiste en PlayerPrefs.
+    /// Luego envía inmediatamente esa misma puntuación al servidor (Talo).
+    /// </summary>
+    public async void SaveScore(string playerName, int score)
     {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        // 1) Guardar local: añadir, ordenar, recortar a 10
+        AddScoreLocal(playerName, score);
+        SaveScoresLocal();
+
+        // 2) Enviar al servidor Talo
+        await OnlineScoreManager.SaveScoreOnline(playerName, score);
+    }
+
+    /// <summary>
+    /// Solo añade la entrada a la lista local y la ordena,
+    /// sin persistir ni enviar al servidor.
+    /// </summary>
+    private void AddScoreLocal(string playerName, int score)
+    {
+        topScores.Add(new ScoreEntry { name = playerName, score = score });
+        topScores.Sort((a, b) => b.score.CompareTo(a.score));
+        if (topScores.Count > 10)
         {
-            Debug.Log("Sin conexión. Usando ranking local.");
-            LoadScores();
-        }
-        else
-        {
-            LoadOnlineTopScores();
+            topScores.RemoveAt(topScores.Count - 1);
         }
     }
 
     /// <summary>
-    /// Guarda una puntuación (local + online).
+    /// Escribe la lista topScores en PlayerPrefs (JSON).
     /// </summary>
-    public void SaveScore(string name, int score)
-    {
-        // 1) Guardar localmente
-        topScores.Add(new ScoreEntry { name = name, score = score });
-        topScores = topScores
-            .OrderByDescending(s => s.score)
-            .Take(MaxTopScores)
-            .ToList();
-        SaveScoresToPrefs();
-
-        // 2) Guardar online (no await para no bloquear la UI)
-        _ = OnlineScoreManager.SaveScoreOnline(name, score);
-    }
-
-    /// <summary>
-    /// Carga las 10 mejores puntuaciones desde Talo y reemplaza la lista local.
-    /// </summary>
-    public async void LoadOnlineTopScores()
-    {
-        var onlineTop = await OnlineScoreManager.GetTopScoresAsync();
-        topScores = onlineTop;
-
-        Debug.Log("Top Scores Online:");
-        foreach (var entry in topScores)
-        {
-            Debug.Log($"{entry.name}: {entry.score}");
-        }
-    }
-
-    void SaveScoresToPrefs()
+    private void SaveScoresLocal()
     {
         string json = JsonUtility.ToJson(new ScoreListWrapper { scores = topScores });
-        PlayerPrefs.SetString(SaveKey, json);
+        PlayerPrefs.SetString(PlayerPrefsKey, json);
         PlayerPrefs.Save();
     }
 
-    void LoadScores()
+    /// <summary>
+    /// Carga desde PlayerPrefs la lista guardada previamente.
+    /// </summary>
+    private void LoadScores()
     {
-        string json = PlayerPrefs.GetString(SaveKey, "");
-        if (!string.IsNullOrEmpty(json))
+        if (PlayerPrefs.HasKey(PlayerPrefsKey))
         {
-            var wrapper = JsonUtility.FromJson<ScoreListWrapper>(json);
+            string json = PlayerPrefs.GetString(PlayerPrefsKey);
+            ScoreListWrapper wrapper = JsonUtility.FromJson<ScoreListWrapper>(json);
             if (wrapper != null && wrapper.scores != null)
             {
                 topScores = wrapper.scores;
-                Debug.Log("Top Scores cargados localmente:");
-                foreach (var s in topScores)
-                {
-                    Debug.Log($"{s.name} - {s.score}");
-                }
             }
-            else
-            {
-                Debug.LogWarning("No se pudo deserializar el wrapper o lista vacía");
-            }
-        }
-        else
-        {
-            Debug.Log("No hay datos previos guardados en PlayerPrefs.");
         }
     }
 
     [System.Serializable]
-    class ScoreListWrapper
+    private class ScoreListWrapper
     {
         public List<ScoreEntry> scores;
     }
+}
+
+[System.Serializable]
+public class ScoreEntry
+{
+    public string name;
+    public int score;
 }

@@ -34,8 +34,7 @@ public class PlayerHealth : MonoBehaviour
         if (deathScreen != null)
             deathScreen.gameObject.SetActive(false);
 
-        if (damageUI != null)
-            damageUI.DisableIndicators();
+        damageUI?.DisableIndicators();
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -46,66 +45,65 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float amount, Vector3 hitDirection)
     {
+        if (currentHealth <= 0f) return;
+
         currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         UpdateHealthUI();
 
-        if (damageSound != null && currentHealth > 0)
+        if (damageSound != null && currentHealth > 0f)
             audioSource.PlayOneShot(damageSound, damageVolume);
 
         if (damageUI != null && hitDirection != Vector3.zero)
             damageUI.ShowDirection(hitDirection, transform, true);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0f)
+            HandleDeath();
+    }
+
+    private void HandleDeath()
+    {
+        Debug.Log("¡Has muerto!");
+
+        if (deathSound != null)
+            audioSource.PlayOneShot(deathSound, deathVolume);
+
+        if (deathScreen != null)
+            deathScreen.gameObject.SetActive(true);
+
+        damageUI?.DisableIndicators();
+
+        if (healthText != null)
+            healthText.gameObject.SetActive(false);
+
+        PlayerArmor armor = GetComponent<PlayerArmor>();
+        armor?.HideArmorUI();
+
+        Time.timeScale = 0f;
+
+        foreach (VRGun gun in vrGuns)
         {
-            Debug.Log("¡Has muerto!");
-
-            if (deathSound != null)
-                audioSource.PlayOneShot(deathSound, deathVolume);
-
-            if (deathScreen != null)
-                deathScreen.gameObject.SetActive(true);
-
-            if (damageUI != null)
-                damageUI.DisableIndicators();
-
-            if (healthText != null)
-                healthText.gameObject.SetActive(false);
-
-            PlayerArmor armor = GetComponent<PlayerArmor>();
-            if (armor != null)
-                armor.HideArmorUI();
-
-            Time.timeScale = 0f;
-
-            foreach (VRGun gun in vrGuns)
-            {
-                if (gun != null)
-                    gun.isDead = true;
-            }
-
-            // Guardar puntuación local
-            int finalScore = GameDataManager.Instance.playerScore;
-            ScoreManager.Instance.SaveScore(GameDataManager.Instance.playerName, finalScore);
-
-            // Subir puntuación a Supabase
-            ScoreUploader uploader = FindObjectOfType<ScoreUploader>();
-            if (uploader != null)
-                uploader.EnviarPuntuacion(GameDataManager.Instance.playerName, finalScore);
-            else
-                Debug.LogWarning("ScoreUploader no encontrado en la escena. No se pudo subir la puntuación.");
-
-            // Reiniciar después de unos segundos
-            StartCoroutine(ReinicioPausa(5f));
+            if (gun != null)
+                gun.isDead = true;
         }
+
+        // Guardar puntuación local
+        if (GameDataManager.Instance != null && ScoreManager.Instance != null)
+        {
+            string name = GameDataManager.Instance.playerName;
+            int score = GameDataManager.Instance.playerScore;
+            ScoreManager.Instance.SaveScore(name, score);
+        }
+
+        StartCoroutine(ReinicioPausa(5f));
     }
 
     private void UpdateHealthUI()
     {
         if (healthText != null)
         {
-            healthText.text = "  +" + Mathf.CeilToInt(currentHealth).ToString();
-            healthText.color = (currentHealth <= 20) ? Color.red : Color.green;
+            healthText.text = $"  +{Mathf.CeilToInt(currentHealth)}";
+            healthText.color = (currentHealth <= 20f) ? Color.red : Color.green;
         }
     }
 
@@ -113,6 +111,6 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Portada"); // Cambia "Portada" si tu escena principal se llama diferente
+        SceneManager.LoadScene("Portada"); // Cambiar si tu escena principal tiene otro nombre
     }
 }

@@ -9,7 +9,8 @@ public class ScoreCount : MonoBehaviour
     public void AddScore(int scoreToAdd)
     {
         totalScore += scoreToAdd;
-        GameManager.Instance.playerScore = totalScore;
+        // <-- Aquí cambiamos GameManager por GameDataManager:
+        GameDataManager.Instance.SetPlayerScore(totalScore);
         UpdateScoreUI();
     }
 

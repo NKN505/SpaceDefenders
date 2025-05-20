@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerArmor : MonoBehaviour
 {
     [Header("Armor Stats")]
@@ -22,14 +23,9 @@ public class PlayerArmor : MonoBehaviour
     private void Start()
     {
         armor = Mathf.Clamp(armor, 0, maxArmor);
-        UpdateArmorUI();
-
-        // Asegura un AudioSource
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
         audioSource.spatialBlend = 0f; // Sonido 2D
+        UpdateArmorUI();
     }
 
     public void AbsorbDamage(float damageAmount, PlayerHealth playerHealth, Vector3 hitDirection)
@@ -38,37 +34,30 @@ public class PlayerArmor : MonoBehaviour
 
         int damage = Mathf.CeilToInt(damageAmount);
 
-        if (Random.value <= 0.2f && armor >= damage)
+        if (armor >= damage && Random.value <= 0.2f)
         {
             armor -= damage;
             UpdateArmorUI();
-            Debug.Log($"Armadura absorbió el 100% del daño: {damage} puntos.");
+            Debug.Log($"Armadura absorbió el 100% del daño: {damage}");
 
-            if (playerHealth.damageUI != null)
-                playerHealth.damageUI.ShowDirection(hitDirection, playerHealth.transform, false);
-
+            playerHealth?.damageUI?.ShowDirection(hitDirection, playerHealth.transform, false);
             return;
         }
 
         if (armor > 0)
         {
             int half = Mathf.CeilToInt(damage * 0.5f);
-            int damageToAbsorb = Mathf.Min(half, Mathf.FloorToInt(armor));
+            int absorbed = Mathf.Min(half, Mathf.FloorToInt(armor));
+            armor -= absorbed;
 
-            armor -= damageToAbsorb;
             UpdateArmorUI();
-            Debug.Log($"Armadura absorbió {damageToAbsorb} de daño.");
+            Debug.Log($"Armadura absorbió {absorbed} de daño.");
 
-            int remainingDamage = damage - damageToAbsorb;
-            if (remainingDamage > 0)
-            {
-                playerHealth.TakeDamage(remainingDamage, hitDirection);
-            }
+            int remaining = damage - absorbed;
+            if (remaining > 0)
+                playerHealth.TakeDamage(remaining, hitDirection);
             else
-            {
-                if (playerHealth.damageUI != null)
-                    playerHealth.damageUI.ShowDirection(hitDirection, playerHealth.transform, false);
-            }
+                playerHealth?.damageUI?.ShowDirection(hitDirection, playerHealth.transform, false);
         }
         else
         {
@@ -82,7 +71,6 @@ public class PlayerArmor : MonoBehaviour
         armor = Mathf.Clamp(armor, 0, maxArmor);
         Debug.Log($"Armadura obtenida. Valor actual: {armor}");
 
-        // ▶️ Reproduce sonido
         if (armorPickupSound != null)
             audioSource.PlayOneShot(armorPickupSound, armorPickupVolume);
 
@@ -107,7 +95,7 @@ public class PlayerArmor : MonoBehaviour
             armorSymbol.gameObject.SetActive(true);
         }
 
-        if (armorCanvas != null && !armorCanvas.gameObject.activeSelf)
+        if (armorCanvas != null)
             armorCanvas.gameObject.SetActive(true);
     }
 
@@ -115,12 +103,11 @@ public class PlayerArmor : MonoBehaviour
     {
         if (armorCanvas != null)
             armorCanvas.gameObject.SetActive(false);
-        else
-        {
-            if (armorText != null)
-                armorText.gameObject.SetActive(false);
-            if (armorSymbol != null)
-                armorSymbol.gameObject.SetActive(false);
-        }
+
+        if (armorText != null)
+            armorText.gameObject.SetActive(false);
+
+        if (armorSymbol != null)
+            armorSymbol.gameObject.SetActive(false);
     }
 }
